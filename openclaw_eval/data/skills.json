@@ -300,12 +300,20 @@
     "category": "data",
     "description": "Access Tonghuashun market and announcement data.",
     "install_source": "Custom",
-    "install_hint": "Configure the 10jqka client, credentials, and API wrapper.",
+    "install_hint": "Download the official SDK from the Tonghuashun download center, prepare the HTTP API manual, and configure credentials securely.",
     "capabilities": ["market_data", "announcements"],
     "dependencies": [],
     "tags": ["data", "api", "cn-market"],
     "config_required": true,
-    "required_config": ["api_username", "api_password", "api_endpoint"]
+    "required_config": [
+      "api_username",
+      "api_password",
+      "sdk_download_url",
+      "sdk_local_path",
+      "http_api_manual_path",
+      "install_root",
+      "api_endpoint"
+    ]
   },
   {
     "slug": "rqdata-api",

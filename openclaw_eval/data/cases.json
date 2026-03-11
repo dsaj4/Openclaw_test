@@ -141,15 +141,42 @@
     "title": "同花顺 API 接口配置与公告数据提取",
     "difficulty": "high",
     "category": "market data",
-    "summary": "验证 10jqka 数据接口接入与公告提取。",
+    "summary": "验证 10jqka Linux SDK 安装、账号登录、行情提取与公告提取全链路是否真实可用。",
     "required_skills": ["10jqka-api"],
     "estimated_minutes": [20, 30],
-    "prompt_source": "04_高难度案例提示词集.md#F11",
-    "success_criteria": ["能完成 API 配置", "能读取公告数据", "能输出提取结果"],
-    "output_artifacts": ["outputs/data/F11_announcements.json"],
-    "prerequisites": ["API 凭据可用"],
-    "tags": ["api", "announcements"],
-    "output_rules": ["This case is only complete when a real .json data file is produced from the API. A Markdown note is not a valid substitute."]
+    "prompt_source": "docs/F11_TEST_SPEC.md",
+    "success_criteria": [
+      "必须使用官方 SDK 下载地址或用户提供的本地 SDK 安装包完成安装",
+      "必须完成同花顺账号登录配置，但账号密码不得写入仓库文件",
+      "必须测试接口可用性，并提取平安银行 2026-01-01 以来的收盘价数据",
+      "必须使用同花顺问财或公告相关接口提取中国神华自 2026-02-13 以来的公告日期、标题、链接",
+      "必须输出至少一份安装/测试报告和至少两份真实 API 结果文件",
+      "如果只写 Markdown 说明而未产出真实数据文件，视为失败"
+    ],
+    "output_artifacts": [
+      "outputs/data/F11_installation_report.md",
+      "outputs/data/F11_000001_close_prices.csv",
+      "outputs/data/F11_601088_announcements.json"
+    ],
+    "required_apis": [
+      "10jqka SDK login/connectivity check",
+      "10jqka historical price API for 000001 close prices",
+      "10jqka announcement or Wencai API for 601088 announcements"
+    ],
+    "prerequisites": [
+      "10jqka account credentials available via secure runtime config",
+      "Linux SDK package available locally or downloadable from the official site",
+      "HTTP API manual available locally or from the official site",
+      "Network access to Tonghuashun services available"
+    ],
+    "tags": ["api", "announcements", "sdk-installation", "market-data"],
+    "output_rules": [
+      "This case is only complete when the SDK is actually installed and real API result files are produced.",
+      "The final deliverables must include one report file plus separate API result files for price data and announcement data.",
+      "The price data file must be a real CSV extracted from the API, not a manually typed table.",
+      "The announcement data file must be a real JSON result extracted from the API, not a Markdown summary.",
+      "Credentials must be supplied via secure runtime configuration and must not be written into repository files."
+    ]
   },
   {
     "case_id": "F12",
