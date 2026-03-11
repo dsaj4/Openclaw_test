@@ -8,9 +8,9 @@
 ## 当前有效案例数
 
 - 中难度：6 个
-- 高难度：11 个
+- 高难度：12 个
 - 极高难度：3 个
-- 总计：20 个
+- 总计：21 个
 
 ## 当前有效案例
 
@@ -38,6 +38,7 @@
 | F15 | 杯柄形态选股策略构建 | pattern-recognition | 30-45分钟 |
 | G1 | 每日 A 股公告信息汇总及定时发送 | announcement-aggregator | 30-45分钟 |
 | G3 | 个股投研分析助手 | stock-research-assistant | 30-45分钟 |
+| G5 | 阿里巴巴专属自动化监控早报 | stock-analysis/agent-browser/email/cron | 20-35分钟 |
 | T2 | 量化跟盘及盘前预警盘后总结 | market-monitor | 30-45分钟 |
 | T3 | 数据库自动更新 | db-updater | 20-30分钟 |
 

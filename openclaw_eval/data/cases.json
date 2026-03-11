@@ -240,7 +240,7 @@
       "10jqka SDK or service endpoint available",
       "A-share stock universe accessible"
     ],
-    "tags": ["strategy", "screening", "browser-research", "wind-api"],
+    "tags": ["strategy", "screening", "browser-research", "10jqka-api"],
     "output_rules": [
       "This case is only complete when both artifacts exist: one strategy report and one separate latest portfolio result file.",
       "The latest portfolio result must be a real CSV generated from 10jqka API data, not a manually typed table in Markdown.",
@@ -289,6 +289,53 @@
     "output_artifacts": ["outputs/data/G3_stock_research.md"],
     "prerequisites": ["研究标的和资料可用"],
     "tags": ["equity", "assistant"]
+  },
+  {
+    "case_id": "G5",
+    "title": "阿里巴巴专属自动化监控早报",
+    "difficulty": "high",
+    "category": "automation",
+    "summary": "验证 OpenClaw 能否在测试模式下按当前时间后 5 分钟触发，对阿里巴巴执行股价监控、定向新闻检索、早报排版和邮件发送。",
+    "required_skills": ["stock-analysis", "agent-browser", "email", "cron"],
+    "estimated_minutes": [20, 35],
+    "prompt_source": "docs/G5_TEST_SPEC.md",
+    "success_criteria": [
+      "必须创建一个在 2026-03-11 18:18（Asia/Shanghai）自动触发的一次性测试任务",
+      "必须抓取 BABA 或 09988 的最新收盘价、成交量和涨跌幅",
+      "当涨跌幅绝对值超过 3% 时，报告开头必须有显著异动警报",
+      "必须检索过去 24 小时内关于阿里云、通义千问、AI Agent 的高价值新闻",
+      "必须过滤重复通稿和低价值八卦内容，只保留 3 条核心资讯",
+      "必须生成一份 Markdown 早报并通过 email skill 发送",
+      "发送成功后才可视为任务完成"
+    ],
+    "output_artifacts": [
+      "outputs/data/G5_aliyun_morning_brief.md",
+      "outputs/data/G5_market_snapshot.json",
+      "outputs/data/G5_news_digest.json",
+      "outputs/data/G5_email_send_log.json"
+    ],
+    "required_apis": [
+      "Yahoo/get_stock_profile and Yahoo/get_stock_insights for BABA context",
+      "Yahoo/get_stock_chart or equivalent market data call for latest price, volume, and change",
+      "Browser-based web search restricted to the last 24 hours for Alibaba Cloud, Tongyi Qianwen, and AI Agent topics",
+      "Email send action to deliver the final report",
+      "Cron or scheduler action for one-time execution at 2026-03-11 18:18 Asia/Shanghai"
+    ],
+    "prerequisites": [
+      "Recipient email address configured at runtime",
+      "Email skill credentials configured",
+      "Scheduler timezone configured",
+      "Browser networking available",
+      "Market data access available"
+    ],
+    "tags": ["automation", "email", "browser-research", "market-monitoring", "alibaba"],
+    "output_rules": [
+      "This case is only complete when the scheduled task, the Markdown brief, the market snapshot file, the news digest file, and the email send log all exist.",
+      "The market snapshot must be a separate structured data file and cannot be embedded only in the Markdown brief.",
+      "The news digest must include source links and concise insights for exactly 3 retained items.",
+      "If the email is not actually sent, the task is not complete even if the brief was generated.",
+      "If the scheduler is not configured for one-time execution at 2026-03-11 18:18 Asia/Shanghai, the automation setup is incomplete."
+    ]
   },
   {
     "case_id": "T2",
