@@ -1,0 +1,73 @@
+{
+  "case_id": "F16",
+  "title": "股票分析 skill 个股深度分析",
+  "status": "dry-run",
+  "mode": "dry-run",
+  "started_at": "2026-03-11T07:13:15.841922+00:00",
+  "finished_at": "2026-03-11T07:13:15.841997+00:00",
+  "duration_seconds": 0.0,
+  "workspace": "D:\\Pyproject\\Openclaw 测试系统\\workspace",
+  "prompt_source": "03_中难度案例提示词集.md#F16",
+  "required_skills": [
+    {
+      "slug": "stock-analysis",
+      "available": false,
+      "config_required": true,
+      "note": "Install from ClawHub. Hint: Install the stock analysis skill and connect a market data source if needed."
+    }
+  ],
+  "required_apis": [
+    "Yahoo/get_stock_profile",
+    "Yahoo/get_stock_insights",
+    "Yahoo/get_stock_chart",
+    "Yahoo/get_stock_holders or Yahoo/get_stock_sec_filing"
+  ],
+  "success_criteria": [
+    "必须调用 Yahoo/get_stock_profile 获取公司画像与业务信息",
+    "必须调用 Yahoo/get_stock_insights 获取技术信号、估值与评级信息",
+    "必须调用 Yahoo/get_stock_chart 获取价格走势数据",
+    "必须至少额外调用 Yahoo/get_stock_holders 或 Yahoo/get_stock_sec_filing 之一，补充尽调维度",
+    "必须保存一份分析报告",
+    "必须保存一份原始 API 结果文件，且不能用 Markdown 代替"
+  ],
+  "output_artifacts": [
+    "outputs/data/F16_stock_analysis_report.md",
+    "outputs/data/F16_api_results.json"
+  ],
+  "notes": [
+    "1 required skill(s) are not installed in the workspace.",
+    "Dry-run mode validates metadata and readiness without running external workflows.",
+    "This case is only complete when both artifacts exist: a report file and a separate raw API result file.",
+    "The API result must be stored as .json and must contain the actual API responses. Markdown is not a valid substitute.",
+    "The report may summarize the findings, but it cannot replace the raw API result file.",
+    "If required APIs are not called, the case is a failure even if the final report looks plausible."
+  ],
+  "steps": [
+    {
+      "name": "Workspace initialization",
+      "status": "completed",
+      "detail": "Ensured workspace exists at D:\\Pyproject\\Openclaw 测试系统\\workspace."
+    },
+    {
+      "name": "Case metadata load",
+      "status": "completed",
+      "detail": "Loaded case F16 with 1 required skill(s)."
+    },
+    {
+      "name": "Skill readiness check",
+      "status": "warning",
+      "detail": "1 skill(s) missing."
+    },
+    {
+      "name": "Execution plan",
+      "status": "skipped",
+      "detail": "Prompt execution is not automated yet; use the generated report as an operator checklist. A Markdown summary never counts as the main artifact unless the case explicitly requires Markdown."
+    }
+  ],
+  "score": {
+    "metadata_completeness": 100,
+    "skill_readiness": 80,
+    "automation_readiness": 85,
+    "overall": 88.3
+  }
+}
