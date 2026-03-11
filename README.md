@@ -4,7 +4,7 @@
 
 ## 现在具备的能力
 
-- 机器可读的 `cases.json`，登记 31 个投研评测案例
+- 机器可读的 `cases.json`，登记当前任务清单中的 20 个投研评测案例
 - 机器可读的 `skills.json`，登记真实 OpenClaw 风格的 skill 元数据
 - 可运行 CLI：
   - `init` 初始化 workspace
@@ -77,13 +77,13 @@ openclaw-eval list-skills
 检查某个案例是否具备运行条件：
 
 ```powershell
-openclaw-eval run F1 --dry-run
+openclaw-eval run F16 --dry-run
 ```
 
 报告会输出到：
 
-- `workspace/outputs/reports/f1.json`
-- `workspace/outputs/reports/f1.md`
+- `workspace/outputs/reports/f16.json`
+- `workspace/outputs/reports/f16.md`
 
 ## 如何模拟“已安装 skill”
 

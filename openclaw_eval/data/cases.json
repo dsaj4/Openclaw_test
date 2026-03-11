@@ -1,129 +1,39 @@
 [
   {
-    "case_id": "F1",
-    "title": "浏览器检索热点新闻信息",
-    "difficulty": "low",
-    "category": "web research",
-    "summary": "使用浏览器 skill 检索热点新闻并提炼市场主题。",
-    "required_skills": ["agent-browser"],
-    "estimated_minutes": [5, 10],
-    "prompt_source": "02_低难度案例提示词集.md#F1",
-    "success_criteria": ["能打开搜索引擎并完成检索", "能提取至少 3 条热点新闻标题和摘要", "能输出结构化总结"],
-    "output_artifacts": ["outputs/data/F1_news_summary.md"],
-    "prerequisites": ["网络可用"],
-    "tags": ["browser", "news"]
-  },
-  {
-    "case_id": "F2",
-    "title": "查询并安装热门 skills",
-    "difficulty": "low",
-    "category": "skill ops",
-    "summary": "验证 skill 发现、安装和基础功能验收流程。",
-    "required_skills": ["skill-search"],
-    "estimated_minutes": [5, 10],
-    "prompt_source": "02_低难度案例提示词集.md#F2",
-    "success_criteria": ["能查询 skill 列表", "能给出安装来源和说明", "能记录安装后的验证结论"],
-    "output_artifacts": ["outputs/data/F2_skill_installation.md"],
-    "prerequisites": ["可访问技能市场"],
-    "tags": ["discovery", "installation"]
-  },
-  {
-    "case_id": "F4",
-    "title": "本地文件管理与信息检索",
-    "difficulty": "low",
-    "category": "filesystem",
-    "summary": "验证本地目录创建、文件写入、搜索、读取和总结能力。",
-    "required_skills": ["file-manager"],
-    "estimated_minutes": [5, 10],
-    "prompt_source": "02_低难度案例提示词集.md#F4",
-    "success_criteria": ["能创建目录与示例文件", "能执行文件搜索", "能整理并输出摘要"],
-    "output_artifacts": ["outputs/data/F4_file_operations.log", "outputs/data/F4_summary.md"],
-    "prerequisites": ["本地文件可写"],
-    "tags": ["filesystem", "search"]
-  },
-  {
-    "case_id": "F5",
-    "title": "自动化任务提醒",
-    "difficulty": "low",
-    "category": "automation",
-    "summary": "验证定时任务创建、查看和触发能力。",
-    "required_skills": ["cron"],
-    "estimated_minutes": [5, 10],
-    "prompt_source": "02_低难度案例提示词集.md#F5",
-    "success_criteria": ["能创建定时任务", "能列出任务并确认配置", "能记录触发或模拟触发结果"],
-    "output_artifacts": ["outputs/data/F5_cron_task.md"],
-    "prerequisites": ["已配置消息通道或允许仅验证任务配置"],
-    "tags": ["automation", "scheduler"]
-  },
-  {
-    "case_id": "F3",
-    "title": "邮件管理（自动收发/筛选）",
-    "difficulty": "medium",
-    "category": "communication",
-    "summary": "验证邮箱连接、收发邮件、过滤和摘要能力。",
-    "required_skills": ["email"],
-    "estimated_minutes": [10, 15],
-    "prompt_source": "03_中难度案例提示词集.md#F3",
-    "success_criteria": ["能连接 SMTP/IMAP", "能发送测试邮件", "能读取和筛选最近邮件", "能生成邮件摘要"],
-    "output_artifacts": ["outputs/data/F3_email_summary.md"],
-    "prerequisites": ["测试邮箱账号可用"],
-    "tags": ["email", "workflow"]
-  },
-  {
-    "case_id": "F6",
-    "title": "百科查询 + AI 绘本生成",
-    "difficulty": "medium",
-    "category": "content generation",
-    "summary": "将百科查询结果转换为故事型内容。",
-    "required_skills": ["baidu-baike", "ai-story"],
-    "estimated_minutes": [10, 15],
-    "prompt_source": "03_中难度案例提示词集.md#F6",
-    "success_criteria": ["能检索百科信息", "能抽取关键知识点", "能生成多页故事结构"],
-    "output_artifacts": ["outputs/data/F6_panda_story.md"],
-    "prerequisites": [],
-    "tags": ["knowledge", "story"]
-  },
-  {
-    "case_id": "F7",
-    "title": "Seedance 视频一键生成",
-    "difficulty": "medium",
-    "category": "multimedia",
-    "summary": "根据脚本生成金融主题短视频。",
-    "required_skills": ["seedance"],
-    "estimated_minutes": [15, 20],
-    "prompt_source": "03_中难度案例提示词集.md#F7",
-    "success_criteria": ["能生成脚本", "能提交视频生成任务", "能保存视频和参数说明"],
-    "output_artifacts": ["outputs/data/F7_market_video.mp4"],
-    "prerequisites": ["视频 API 权限可用"],
-    "tags": ["video", "generation"]
-  },
-  {
-    "case_id": "F10",
-    "title": "自动化接管浏览器信息检索",
-    "difficulty": "medium",
-    "category": "web research",
-    "summary": "在更复杂的浏览器链路中验证自动检索和信息提取。",
-    "required_skills": ["agent-browser"],
-    "estimated_minutes": [15, 20],
-    "prompt_source": "03_中难度案例提示词集.md#F10",
-    "success_criteria": ["能执行多步浏览器操作", "能抽取目标信息", "能保存检索结果"],
-    "output_artifacts": ["outputs/data/F10_browser_research.md"],
-    "prerequisites": ["网络可用"],
-    "tags": ["browser", "automation"]
-  },
-  {
     "case_id": "F16",
     "title": "股票分析 skill 个股深度分析",
     "difficulty": "medium",
     "category": "equity research",
-    "summary": "验证个股研究、估值与结论输出能力。",
+    "summary": "验证 stock-analysis skill 是否按要求调用真实 Yahoo API，并输出研究报告与原始 API 结果。",
     "required_skills": ["stock-analysis"],
     "estimated_minutes": [15, 20],
     "prompt_source": "03_中难度案例提示词集.md#F16",
-    "success_criteria": ["能给出个股核心判断", "能输出基本面或技术面依据", "能形成研究摘要"],
-    "output_artifacts": ["outputs/data/F16_stock_analysis.md"],
-    "prerequisites": ["市场数据源可用"],
-    "tags": ["stock", "analysis"]
+    "success_criteria": [
+      "必须调用 Yahoo/get_stock_profile 获取公司画像与业务信息",
+      "必须调用 Yahoo/get_stock_insights 获取技术信号、估值与评级信息",
+      "必须调用 Yahoo/get_stock_chart 获取价格走势数据",
+      "必须至少额外调用 Yahoo/get_stock_holders 或 Yahoo/get_stock_sec_filing 之一，补充尽调维度",
+      "必须保存一份分析报告",
+      "必须保存一份原始 API 结果文件，且不能用 Markdown 代替"
+    ],
+    "output_artifacts": [
+      "outputs/data/F16_stock_analysis_report.md",
+      "outputs/data/F16_api_results.json"
+    ],
+    "required_apis": [
+      "Yahoo/get_stock_profile",
+      "Yahoo/get_stock_insights",
+      "Yahoo/get_stock_chart",
+      "Yahoo/get_stock_holders or Yahoo/get_stock_sec_filing"
+    ],
+    "prerequisites": ["stock-analysis skill 已安装", "Yahoo 数据接口可访问", "市场数据源配置完成"],
+    "tags": ["stock", "analysis", "api-verification"],
+    "output_rules": [
+      "This case is only complete when both artifacts exist: a report file and a separate raw API result file.",
+      "The API result must be stored as .json and must contain the actual API responses. Markdown is not a valid substitute.",
+      "The report may summarize the findings, but it cannot replace the raw API result file.",
+      "If required APIs are not called, the case is a failure even if the final report looks plausible."
+    ]
   },
   {
     "case_id": "G2",
@@ -151,7 +61,8 @@
     "success_criteria": ["能读取 PDF 关键内容", "能形成结构化摘要", "能生成 Word 报告"],
     "output_artifacts": ["outputs/data/GF1_financial_report.docx"],
     "prerequisites": ["样例 PDF 可用"],
-    "tags": ["pdf", "docx"]
+    "tags": ["pdf", "docx"],
+    "output_rules": ["This case is only complete when a real .docx file is produced. A Markdown summary is not a valid substitute."]
   },
   {
     "case_id": "GF2",
@@ -165,7 +76,8 @@
     "success_criteria": ["能从 PDF 提炼内容", "能生成有结构的 PPT 大纲", "能输出 PPT 文件"],
     "output_artifacts": ["outputs/data/GF2_roadshow.pptx"],
     "prerequisites": ["样例 PDF 可用"],
-    "tags": ["pdf", "ppt"]
+    "tags": ["pdf", "ppt"],
+    "output_rules": ["This case is only complete when a real .pptx file is produced. A Markdown outline is not a valid substitute."]
   },
   {
     "case_id": "GF3",
@@ -182,34 +94,6 @@
     "tags": ["market", "watchlist"]
   },
   {
-    "case_id": "GF4",
-    "title": "每日资讯晨报自动发送",
-    "difficulty": "medium",
-    "category": "automation",
-    "summary": "聚合资讯并通过定时任务自动分发。",
-    "required_skills": ["news-aggregator", "cron"],
-    "estimated_minutes": [15, 20],
-    "prompt_source": "03_中难度案例提示词集.md#GF4",
-    "success_criteria": ["能聚合多条资讯", "能形成晨报摘要", "能配置发送任务"],
-    "output_artifacts": ["outputs/data/GF4_morning_brief.md"],
-    "prerequisites": ["消息渠道可用"],
-    "tags": ["news", "automation"]
-  },
-  {
-    "case_id": "GF5",
-    "title": "信息爬取与数据可视化",
-    "difficulty": "medium",
-    "category": "data extraction",
-    "summary": "抓取网页信息并输出为结构化数据或图表。",
-    "required_skills": ["web-scraper", "xlsx-writer"],
-    "estimated_minutes": [15, 20],
-    "prompt_source": "03_中难度案例提示词集.md#GF5",
-    "success_criteria": ["能抓取目标页面", "能保存结构化数据", "能生成可视化输出或表格"],
-    "output_artifacts": ["outputs/data/GF5_scraped_data.xlsx"],
-    "prerequisites": ["网络可用"],
-    "tags": ["scraping", "xlsx"]
-  },
-  {
     "case_id": "GF7",
     "title": "技术分析与 K 线图分析",
     "difficulty": "medium",
@@ -222,20 +106,6 @@
     "output_artifacts": ["outputs/data/GF7_technical_analysis.md"],
     "prerequisites": ["行情数据或图表文件可用"],
     "tags": ["technical", "chart"]
-  },
-  {
-    "case_id": "T1",
-    "title": "邮件筛选简历",
-    "difficulty": "medium",
-    "category": "communication",
-    "summary": "从邮件中提取简历并做初步筛选。",
-    "required_skills": ["email-parser"],
-    "estimated_minutes": [10, 15],
-    "prompt_source": "03_中难度案例提示词集.md#T1",
-    "success_criteria": ["能识别简历邮件", "能抽取候选人信息", "能给出筛选结论"],
-    "output_artifacts": ["outputs/data/T1_resume_screening.md"],
-    "prerequisites": ["测试邮件样本可用"],
-    "tags": ["email", "resume"]
   },
   {
     "case_id": "F8",
@@ -263,7 +133,8 @@
     "success_criteria": ["能形成清晰 storyline", "能提炼图表与关键论点", "能产出 PPT"],
     "output_artifacts": ["outputs/data/F9_consulting_deck.pptx"],
     "prerequisites": ["研究主题可用"],
-    "tags": ["consulting", "ppt"]
+    "tags": ["consulting", "ppt"],
+    "output_rules": ["This case is only complete when a real .pptx file is produced. A Markdown deck draft is not a valid substitute."]
   },
   {
     "case_id": "F11",
@@ -277,7 +148,8 @@
     "success_criteria": ["能完成 API 配置", "能读取公告数据", "能输出提取结果"],
     "output_artifacts": ["outputs/data/F11_announcements.json"],
     "prerequisites": ["API 凭据可用"],
-    "tags": ["api", "announcements"]
+    "tags": ["api", "announcements"],
+    "output_rules": ["This case is only complete when a real .json data file is produced from the API. A Markdown note is not a valid substitute."]
   },
   {
     "case_id": "F12",
@@ -291,7 +163,8 @@
     "success_criteria": ["能完成 API 配置", "能提取目标数据", "能输出样例结果"],
     "output_artifacts": ["outputs/data/F12_rqdata_extract.csv"],
     "prerequisites": ["API 凭据可用"],
-    "tags": ["api", "high-frequency"]
+    "tags": ["api", "high-frequency"],
+    "output_rules": ["This case is only complete when a real .csv extract is produced. A Markdown description is not a valid substitute."]
   },
   {
     "case_id": "F13",
@@ -305,7 +178,8 @@
     "success_criteria": ["能完成 Wind 连接", "能提取数据", "能输出结果和说明"],
     "output_artifacts": ["outputs/data/F13_wind_extract.csv"],
     "prerequisites": ["Wind 权限可用"],
-    "tags": ["api", "wind"]
+    "tags": ["api", "wind"],
+    "output_rules": ["This case is only complete when a real .csv extract is produced. A Markdown description is not a valid substitute."]
   },
   {
     "case_id": "F14",

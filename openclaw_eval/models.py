@@ -19,6 +19,7 @@ class SkillSpec:
     dependencies: list[str] = field(default_factory=list)
     tags: list[str] = field(default_factory=list)
     config_required: bool = False
+    required_config: list[str] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "SkillSpec":
@@ -40,8 +41,10 @@ class CaseSpec:
     prompt_source: str
     success_criteria: list[str]
     output_artifacts: list[str]
+    required_apis: list[str] = field(default_factory=list)
     prerequisites: list[str] = field(default_factory=list)
     tags: list[str] = field(default_factory=list)
+    output_rules: list[str] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "CaseSpec":
@@ -74,6 +77,7 @@ class EvaluationResult:
     workspace: str
     prompt_source: str
     required_skills: list[SkillCheck]
+    required_apis: list[str]
     success_criteria: list[str]
     output_artifacts: list[str]
     notes: list[str] = field(default_factory=list)

@@ -41,6 +41,15 @@ def cmd_list_skills(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_show_skill(args: argparse.Namespace) -> int:
+    skill = load_skills().get(args.slug)
+    if skill is None:
+        print(f"Skill not found: {args.slug}")
+        return 1
+    print(json.dumps(skill.to_dict(), ensure_ascii=False, indent=2))
+    return 0
+
+
 def cmd_run(args: argparse.Namespace) -> int:
     case = load_cases().get(args.case_id)
     if case is None:
@@ -84,6 +93,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     list_skills_parser = subparsers.add_parser("list-skills", help="List registered skills")
     list_skills_parser.set_defaults(func=cmd_list_skills)
+
+    show_skill_parser = subparsers.add_parser("show-skill", help="Show a skill definition")
+    show_skill_parser.add_argument("slug", help="Skill slug, for example agent-browser")
+    show_skill_parser.set_defaults(func=cmd_show_skill)
 
     workflow_parser = subparsers.add_parser("show-workflow", help="Show the execution workflow")
     workflow_parser.set_defaults(func=cmd_show_workflow)

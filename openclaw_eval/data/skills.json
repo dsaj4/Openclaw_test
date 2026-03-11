@@ -49,7 +49,8 @@
     "capabilities": ["schedule_task", "list_jobs", "trigger_job"],
     "dependencies": [],
     "tags": ["automation", "scheduler"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["notification_channel", "schedule_timezone"]
   },
   {
     "slug": "email",
@@ -62,7 +63,8 @@
     "capabilities": ["send_mail", "read_mail", "filter_mail"],
     "dependencies": [],
     "tags": ["email", "workflow"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["smtp_host", "smtp_port", "imap_host", "imap_port", "email_username", "email_password"]
   },
   {
     "slug": "baidu-baike",
@@ -101,7 +103,8 @@
     "capabilities": ["generate_video"],
     "dependencies": [],
     "tags": ["video", "generation"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["api_key", "model_name"]
   },
   {
     "slug": "stock-analysis",
@@ -114,7 +117,8 @@
     "capabilities": ["equity_analysis", "valuation", "technical_review"],
     "dependencies": [],
     "tags": ["finance", "equity"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["market_data_provider", "market_data_credentials"]
   },
   {
     "slug": "framework-iterator",
@@ -192,7 +196,8 @@
     "capabilities": ["watch_market", "quote"],
     "dependencies": [],
     "tags": ["finance", "data"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["market_data_provider", "watchlist_source"]
   },
   {
     "slug": "news-aggregator",
@@ -205,7 +210,8 @@
     "capabilities": ["collect_news", "summarize_news"],
     "dependencies": [],
     "tags": ["news", "automation"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["news_source", "delivery_channel", "schedule_timezone"]
   },
   {
     "slug": "web-scraper",
@@ -244,7 +250,8 @@
     "capabilities": ["chart_analysis", "indicator_signal"],
     "dependencies": [],
     "tags": ["finance", "technical"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["market_data_provider", "chart_source"]
   },
   {
     "slug": "email-parser",
@@ -257,7 +264,8 @@
     "capabilities": ["extract_resume", "classify_mail"],
     "dependencies": [],
     "tags": ["email", "parsing"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["mailbox_connection", "resume_parser_rules"]
   },
   {
     "slug": "deep-research",
@@ -296,7 +304,8 @@
     "capabilities": ["market_data", "announcements"],
     "dependencies": [],
     "tags": ["data", "api", "cn-market"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["api_username", "api_password", "api_endpoint"]
   },
   {
     "slug": "rqdata-api",
@@ -309,7 +318,8 @@
     "capabilities": ["market_data", "factor_data"],
     "dependencies": [],
     "tags": ["data", "api", "quant"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["rqdata_username", "rqdata_password"]
   },
   {
     "slug": "wind-api",
@@ -322,7 +332,8 @@
     "capabilities": ["market_data", "macro_data", "news_data"],
     "dependencies": [],
     "tags": ["data", "api", "wind"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["wind_terminal_access", "windpy_environment"]
   },
   {
     "slug": "strategy-builder",
@@ -335,7 +346,8 @@
     "capabilities": ["strategy_design", "screening"],
     "dependencies": ["stock-analysis"],
     "tags": ["quant", "strategy"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["market_data_provider", "backtest_data_range"]
   },
   {
     "slug": "pattern-recognition",
@@ -348,7 +360,8 @@
     "capabilities": ["pattern_scan", "signal_generation"],
     "dependencies": ["technical-analyst"],
     "tags": ["quant", "technical"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["chart_data_source", "pattern_definition_rules"]
   },
   {
     "slug": "announcement-aggregator",
@@ -361,7 +374,8 @@
     "capabilities": ["collect_announcements", "schedule_delivery"],
     "dependencies": ["cron"],
     "tags": ["automation", "announcements"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["announcement_source", "delivery_channel", "schedule_timezone"]
   },
   {
     "slug": "stock-research-assistant",
@@ -374,7 +388,8 @@
     "capabilities": ["company_research", "memo"],
     "dependencies": ["stock-analysis", "pdf-reader"],
     "tags": ["equity", "research"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["market_data_provider", "document_source", "research_template"]
   },
   {
     "slug": "market-monitor",
@@ -387,7 +402,8 @@
     "capabilities": ["monitor_market", "send_alerts"],
     "dependencies": ["stock-watcher", "cron"],
     "tags": ["monitoring", "alerts"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["market_data_provider", "alert_channel", "monitoring_schedule"]
   },
   {
     "slug": "db-updater",
@@ -400,7 +416,8 @@
     "capabilities": ["ingest_data", "refresh_dataset"],
     "dependencies": ["cron"],
     "tags": ["data", "etl"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["database_dsn", "source_connector", "refresh_schedule"]
   },
   {
     "slug": "factor-mining",
@@ -413,7 +430,8 @@
     "capabilities": ["factor_generation", "backtest", "robustness_test"],
     "dependencies": ["rqdata-api"],
     "tags": ["quant", "factor"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["factor_data_source", "backtest_engine", "benchmark_definition"]
   },
   {
     "slug": "report-reproduction",
@@ -426,7 +444,8 @@
     "capabilities": ["reproduce_report", "cross_check"],
     "dependencies": ["pdf-reader", "docx-writer"],
     "tags": ["research", "report"],
-    "config_required": true
+    "config_required": true,
+    "required_config": ["source_report", "source_data", "report_template"]
   },
   {
     "slug": "code-engineering",

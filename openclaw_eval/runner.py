@@ -64,6 +64,8 @@ class EvaluationRunner:
             notes.append(f"{missing_count} required skill(s) are not installed in the workspace.")
         if dry_run:
             notes.append("Dry-run mode validates metadata and readiness without running external workflows.")
+        if case.output_rules:
+            notes.extend(case.output_rules)
         steps = [
             {
                 "name": "Workspace initialization",
@@ -83,7 +85,7 @@ class EvaluationRunner:
             {
                 "name": "Execution plan",
                 "status": "skipped" if dry_run else "pending",
-                "detail": "Prompt execution is not automated yet; use the generated report as an operator checklist.",
+                "detail": "Prompt execution is not automated yet; use the generated report as an operator checklist. A Markdown summary never counts as the main artifact unless the case explicitly requires Markdown.",
             },
         ]
         finished = datetime.now(UTC)
@@ -104,6 +106,7 @@ class EvaluationRunner:
             workspace=str(self.workspace),
             prompt_source=case.prompt_source,
             required_skills=checks,
+            required_apis=case.required_apis,
             success_criteria=case.success_criteria,
             output_artifacts=case.output_artifacts,
             notes=notes,

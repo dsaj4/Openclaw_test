@@ -1,7 +1,14 @@
 {
   "name": "OpenClaw Research Evaluation Workflow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "goal": "Ensure OpenClaw can install, inspect, validate, and execute research evaluation cases in a deterministic order.",
+  "non_negotiables": [
+    "Do not replace a required real artifact with a Markdown summary unless the case explicitly defines Markdown as the main target artifact.",
+    "If a case expects DOCX, PPTX, XLSX, MP4, CSV, or JSON, the run is incomplete until that exact artifact exists.",
+    "If a required skill is not installed, install it first; do not simulate its behavior with generic text output.",
+    "If a required skill needs configuration, finish configuration before claiming the case is executable.",
+    "A report about an artifact is not the artifact itself."
+  ],
   "preflight": [
     "Confirm the project is installed with `py -m pip install -e .`.",
     "Initialize the workspace with `py -m openclaw_eval.cli init`.",
@@ -28,14 +35,14 @@
       "name": "Inspect case requirements",
       "action": "Open the structured case definition and read required skills, outputs, and criteria.",
       "command": "py -m openclaw_eval.cli show-case <CASE_ID>",
-      "success_check": "The required skill list and expected outputs are known."
+      "success_check": "The required skill list, output artifacts, and output rules are known."
     },
     {
       "step": 4,
-      "name": "Verify skill installation",
-      "action": "For every required skill, ensure `workspace/skills/<slug>/SKILL.md` and `workspace/skills/<slug>/manifest.json` both exist.",
-      "command": "Manual file check or create folders from workspace/docs/skill_template",
-      "success_check": "All required skills are marked available."
+      "name": "Verify skill installation and configuration",
+      "action": "For every required skill, ensure SKILL.md and manifest.json both exist, then inspect configuration requirements.",
+      "command": "Manual file check or create folders from workspace/docs/skill_template, then run `py -m openclaw_eval.cli show-skill <slug>`",
+      "success_check": "All required skills are installed and all required configuration items are known."
     },
     {
       "step": 5,
@@ -47,17 +54,19 @@
     {
       "step": 6,
       "name": "Read report and decide next action",
-      "action": "If any skill is missing or incomplete, install or complete it first. If all skills are ready, use the case prompt and skill docs to perform the real task manually or with a future executor.",
+      "action": "If any skill is missing, incomplete, or unconfigured, fix it first. For non-Markdown targets, require the actual artifact file to be produced before claiming completion.",
       "command": "Open workspace/outputs/reports/<case_id>.md",
-      "success_check": "There is a clear decision: fix missing skills or move to real execution."
+      "success_check": "There is a clear decision: fix missing skills/configuration or move to real execution."
     }
   ],
   "decision_rules": [
     "If the case ID is missing, stop and choose a valid case.",
     "If any required skill is not available, do not claim the case is executable.",
     "If a skill folder exists but SKILL.md or manifest.json is missing, classify it as incomplete installation.",
+    "If a skill has required configuration items, do not classify it as ready until those items are configured.",
     "Always produce a dry-run report before any real execution.",
-    "Only treat a case as ready when all required skills pass verification."
+    "Only treat a case as ready when all required skills pass verification.",
+    "Do not accept Markdown commentary as a substitute for real outputs like DOCX, PPTX, XLSX, MP4, CSV, or JSON."
   ],
   "outputs": [
     "workspace/outputs/reports/<case_id>.json",

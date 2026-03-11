@@ -11,6 +11,7 @@ def render_markdown(result: EvaluationResult) -> str:
         f"- `{item.slug}`: {'available' if item.available else 'missing'}; {item.note}"
         for item in result.required_skills
     )
+    apis = "\n".join(f"- `{item}`" for item in result.required_apis) or "- None"
     steps = "\n".join(
         f"### {step['name']}\n- Status: {step['status']}\n- Detail: {step['detail']}"
         for step in result.steps
@@ -32,6 +33,9 @@ def render_markdown(result: EvaluationResult) -> str:
 
 ## Skill Checks
 {skills}
+
+## Required APIs
+{apis}
 
 ## Success Criteria
 {criteria}
