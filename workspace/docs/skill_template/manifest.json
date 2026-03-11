@@ -1,0 +1,10 @@
+{
+  "slug": "example-skill",
+  "name": "Example Skill",
+  "version": "1.0.0",
+  "entry_type": "instructional",
+  "install_source": "ClawHub",
+  "config_required": false,
+  "capabilities": ["example_capability"],
+  "dependencies": []
+}

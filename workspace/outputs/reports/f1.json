@@ -1,0 +1,58 @@
+{
+  "case_id": "F1",
+  "title": "浏览器检索热点新闻信息",
+  "status": "dry-run",
+  "mode": "dry-run",
+  "started_at": "2026-03-11T04:48:29.969274+00:00",
+  "finished_at": "2026-03-11T04:48:29.969366+00:00",
+  "duration_seconds": 0.0,
+  "workspace": "D:\\Pyproject\\Openclaw 测试系统\\workspace",
+  "prompt_source": "02_低难度案例提示词集.md#F1",
+  "required_skills": [
+    {
+      "slug": "agent-browser",
+      "available": true,
+      "config_required": false,
+      "note": "Found installed skill with manifest and SKILL.md at D:\\Pyproject\\Openclaw 测试系统\\workspace\\skills\\agent-browser."
+    }
+  ],
+  "success_criteria": [
+    "能打开搜索引擎并完成检索",
+    "能提取至少 3 条热点新闻标题和摘要",
+    "能输出结构化总结"
+  ],
+  "output_artifacts": [
+    "outputs/data/F1_news_summary.md"
+  ],
+  "notes": [
+    "Dry-run mode validates metadata and readiness without running external workflows."
+  ],
+  "steps": [
+    {
+      "name": "Workspace initialization",
+      "status": "completed",
+      "detail": "Ensured workspace exists at D:\\Pyproject\\Openclaw 测试系统\\workspace."
+    },
+    {
+      "name": "Case metadata load",
+      "status": "completed",
+      "detail": "Loaded case F1 with 1 required skill(s)."
+    },
+    {
+      "name": "Skill readiness check",
+      "status": "completed",
+      "detail": "All required skills available."
+    },
+    {
+      "name": "Execution plan",
+      "status": "skipped",
+      "detail": "Prompt execution is not automated yet; use the generated report as an operator checklist."
+    }
+  ],
+  "score": {
+    "metadata_completeness": 100,
+    "skill_readiness": 100,
+    "automation_readiness": 85,
+    "overall": 95.0
+  }
+}

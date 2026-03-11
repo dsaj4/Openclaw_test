@@ -1,0 +1,66 @@
+{
+  "name": "OpenClaw Research Evaluation Workflow",
+  "version": "1.0.0",
+  "goal": "Ensure OpenClaw can install, inspect, validate, and execute research evaluation cases in a deterministic order.",
+  "preflight": [
+    "Confirm the project is installed with `py -m pip install -e .`.",
+    "Initialize the workspace with `py -m openclaw_eval.cli init`.",
+    "Use `py -m openclaw_eval.cli list-cases` to inspect available cases.",
+    "Use `py -m openclaw_eval.cli show-case <CASE_ID>` to read the selected case."
+  ],
+  "execution_steps": [
+    {
+      "step": 1,
+      "name": "Initialize workspace",
+      "action": "Create workspace folders and skill templates.",
+      "command": "py -m openclaw_eval.cli init",
+      "success_check": "workspace/skills, workspace/outputs/reports, and workspace/docs/skill_template exist."
+    },
+    {
+      "step": 2,
+      "name": "Select case",
+      "action": "List cases and choose a case ID.",
+      "command": "py -m openclaw_eval.cli list-cases",
+      "success_check": "A valid case ID is selected."
+    },
+    {
+      "step": 3,
+      "name": "Inspect case requirements",
+      "action": "Open the structured case definition and read required skills, outputs, and criteria.",
+      "command": "py -m openclaw_eval.cli show-case <CASE_ID>",
+      "success_check": "The required skill list and expected outputs are known."
+    },
+    {
+      "step": 4,
+      "name": "Verify skill installation",
+      "action": "For every required skill, ensure `workspace/skills/<slug>/SKILL.md` and `workspace/skills/<slug>/manifest.json` both exist.",
+      "command": "Manual file check or create folders from workspace/docs/skill_template",
+      "success_check": "All required skills are marked available."
+    },
+    {
+      "step": 5,
+      "name": "Run readiness evaluation",
+      "action": "Generate a dry-run report before attempting actual execution.",
+      "command": "py -m openclaw_eval.cli run <CASE_ID> --dry-run",
+      "success_check": "A JSON report and Markdown report are generated under workspace/outputs/reports."
+    },
+    {
+      "step": 6,
+      "name": "Read report and decide next action",
+      "action": "If any skill is missing or incomplete, install or complete it first. If all skills are ready, use the case prompt and skill docs to perform the real task manually or with a future executor.",
+      "command": "Open workspace/outputs/reports/<case_id>.md",
+      "success_check": "There is a clear decision: fix missing skills or move to real execution."
+    }
+  ],
+  "decision_rules": [
+    "If the case ID is missing, stop and choose a valid case.",
+    "If any required skill is not available, do not claim the case is executable.",
+    "If a skill folder exists but SKILL.md or manifest.json is missing, classify it as incomplete installation.",
+    "Always produce a dry-run report before any real execution.",
+    "Only treat a case as ready when all required skills pass verification."
+  ],
+  "outputs": [
+    "workspace/outputs/reports/<case_id>.json",
+    "workspace/outputs/reports/<case_id>.md"
+  ]
+}

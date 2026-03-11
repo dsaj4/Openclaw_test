@@ -1,0 +1,106 @@
+# OpenClaw 投研场景评测系统
+
+这是一个从“提示词文档集合”升级而来的、可运行的 OpenClaw 风格评测框架。它不再只保存案例说明，而是把案例、skill、workspace、报告输出统一为真实系统结构，便于后续扩展为真正的 skill 验收平台。
+
+## 现在具备的能力
+
+- 机器可读的 `cases.json`，登记 31 个投研评测案例
+- 机器可读的 `skills.json`，登记真实 OpenClaw 风格的 skill 元数据
+- 可运行 CLI：
+  - `init` 初始化 workspace
+  - `list-cases` 查看案例
+  - `show-case` 查看案例详情
+  - `list-skills` 查看 skill 注册表
+  - `run --dry-run` 执行案例就绪性检查并生成报告
+- 自动生成 Markdown 和 JSON 报告
+- 用本地 `workspace/skills/<slug>/` 目录作为“已安装 skill”的现实判定方式
+
+## 项目结构
+
+```text
+openclaw_eval/
+  cli.py
+  runner.py
+  registry.py
+  reporting.py
+  workspace.py
+  data/
+    cases.json
+    skills.json
+workspace/
+  skills/
+  outputs/
+    reports/
+    logs/
+    data/
+```
+
+## OpenClaw 风格设计原则
+
+这个版本把“真实 skill 系统”抽象成三层：
+
+1. `SkillSpec`
+   记录 skill 的 `slug`、版本、来源、能力、依赖、配置要求。
+2. `CaseSpec`
+   记录案例的目标、所需 skill、成功标准、输出物和原始提示词来源。
+3. `EvaluationRunner`
+   对案例执行 workspace 初始化、skill 就绪性检查、报告生成和评分。
+
+这比原来只靠 Markdown 提示词驱动，更接近真实 OpenClaw skill 平台的接入方式。
+
+## 使用方式
+
+先安装项目：
+
+```powershell
+py -m pip install -e .
+```
+
+初始化 workspace：
+
+```powershell
+openclaw-eval init
+```
+
+查看案例：
+
+```powershell
+openclaw-eval list-cases
+```
+
+查看 skill：
+
+```powershell
+openclaw-eval list-skills
+```
+
+检查某个案例是否具备运行条件：
+
+```powershell
+openclaw-eval run F1 --dry-run
+```
+
+报告会输出到：
+
+- `workspace/outputs/reports/f1.json`
+- `workspace/outputs/reports/f1.md`
+
+## 如何模拟“已安装 skill”
+
+真实 OpenClaw 平台里，skill 通常有安装状态、版本和配置。本地版本先用目录判定：
+
+```text
+workspace/skills/agent-browser/
+workspace/skills/stock-analysis/
+```
+
+只要对应目录存在，系统就会把该 skill 判定为“已安装”。
+
+## 下一步建议
+
+如果你要继续把它做成更像真实 OpenClaw 的系统，下一阶段最值得补的是：
+
+1. 给每个 `workspace/skills/<slug>/` 增加真正的 `SKILL.md` 模板和 manifest。
+2. 在 `run` 中接入真正的执行适配器，而不是只做就绪性检查。
+3. 为案例增加评分细则和证据采集。
+4. 增加批量运行、排行榜、失败分类和回归测试能力。
