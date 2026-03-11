@@ -213,14 +213,40 @@
     "title": "PB-ROE 选股策略构建",
     "difficulty": "high",
     "category": "quant",
-    "summary": "构建并说明 PB-ROE 选股逻辑。",
-    "required_skills": ["strategy-builder"],
+    "summary": "验证 OpenClaw 能否先用浏览器检索 PB-ROE 策略框架，再使用同花顺 API 真实取数并构建最新 PB-ROE 持仓组合。",
+    "required_skills": ["agent-browser", "10jqka-api", "strategy-builder"],
     "estimated_minutes": [30, 45],
-    "prompt_source": "04_高难度案例提示词集.md#F14",
-    "success_criteria": ["能定义策略逻辑", "能形成选股条件", "能输出回测或验证思路"],
-    "output_artifacts": ["outputs/data/F14_pb_roe_strategy.md"],
-    "prerequisites": ["市场数据源可用"],
-    "tags": ["strategy", "screening"]
+    "prompt_source": "docs/F14_TEST_SPEC.md",
+    "success_criteria": [
+      "必须使用 Chrome 浏览器打开知乎并检索 PB-ROE 选股策略",
+      "必须总结一份 PB-ROE 策略构建框架，并明确核心指标、筛选条件和评分逻辑",
+      "必须使用同花顺 API 真实提取构建策略所需的指标数据，不能手工编造",
+      "必须计算出最新一期持仓组合，并给出主要指标与综合得分",
+      "必须输出一份策略报告和一份最新持仓结果文件",
+      "如果只写 Markdown 思路而没有真实持仓结果文件，视为失败"
+    ],
+    "output_artifacts": [
+      "outputs/data/F14_pb_roe_strategy_report.md",
+      "outputs/data/F14_latest_portfolio.csv"
+    ],
+    "required_apis": [
+      "Browser search on Zhihu for PB-ROE strategy framework",
+      "10jqka API for PB and ROE related factor data",
+      "10jqka API for latest universe screening data"
+    ],
+    "prerequisites": [
+      "Chrome browser available",
+      "10jqka API credentials configured",
+      "10jqka SDK or service endpoint available",
+      "A-share stock universe accessible"
+    ],
+    "tags": ["strategy", "screening", "browser-research", "wind-api"],
+    "output_rules": [
+      "This case is only complete when both artifacts exist: one strategy report and one separate latest portfolio result file.",
+      "The latest portfolio result must be a real CSV generated from 10jqka API data, not a manually typed table in Markdown.",
+      "The report may summarize the framework and findings, but it cannot replace the portfolio result file.",
+      "If browser research on Zhihu or 10jqka API data extraction is skipped, the case is a failure even if the report looks plausible."
+    ]
   },
   {
     "case_id": "F15",
